@@ -7,6 +7,9 @@ Reasonably Sheltered, or Sheltered for short, is a small mod that adds a key com
 After installing and enabling the mod in Remix, you should be good to go. Ingame, hold **down** while pressing **grab** and the lizard should stay where they are or follow.
 The mod will show a popup when the lizard switches from follow to staying and vice-versa. If you dont see any popup, try moving closer to the lizard.
 
+## Steam Workshop
+The mod can be found in the workshop here: https://steamcommunity.com/sharedfiles/filedetails/?id=2927358839
+
 <br/>
 
 # Building the mod
