@@ -6,21 +6,6 @@ How to set up this mod:
      -- ..
      -- RainWorld.exe
      -- ...
-2. Edit 'mod/modinfo.json' to your liking, make sure to use a lowercase mod id
-3. Any assets and files that need to be loaded by the game go into 'mod', this folder is copied to the build folder
-
-
-
-Where to write the mod:
-The project comes with two templates: a plugin template and a patcher template, both found in src/
-You can copy 'plugin' or 'patcher' and use that to develop your plugin, as long as it is saved in src/ it should work.
-
-
-
-Note about patchers:
-Patchers CANNOT be debugged using the Unity debug tools as they load too early.
-You will need to use debug logging to debug patchers.
-
 
 
 Building:
@@ -30,7 +15,7 @@ The final mod is saved in `build/remix`, ready to be installed outside of the pr
 
 
 
-Debugging your mods:
+Debugging the mod:
 You can run the project from Visual Studio and it should start Rain World, follow these steps after launch:
 1. Go to Remix
 2. Enable dev tools
@@ -59,16 +44,3 @@ If a console with a lot of errors pops up and a blackscreen occurs, the BepInEx 
 3. Navigate to BepInEx/plugins and delete everything apart from the file HOOKS-Assembly-CSharp.dll
 4. Navigate back and go to BepInEx/patchers, delete everything apart from BepInEx.MonoMod.Loader, BepInEx.MultiFolderLoader and Dragons.PublicDragon
 5. Restart the game, the errors should be gone
-
-
-
-Assets and other content:
-Note that this is untested but deducted from the built-in mods.
-
-According to what i heard in the Discord server, Rain World loads mergedmods first followed by mod assets, after that it loads from streamingassets.
-As long as you follow the structure seen in RainWorld_Data/StreamingAssets, you can override and/or add assets by adding the files and folders to your project's mod folder.
-For more info you can refer to https://rainworldmodding.miraheze.org/wiki/Downpour_Reference/Mod_Directories
-
-The 'mod/' folder is copied to the final mod package and Remix will load the assets from that package should you have any.
-
-REMEMBER: Your assets are NOT copied over unless you fully rebuild the mod in Visual Studio, after each change to non-code parts of the mod you MUST rebuild the full mod.
