@@ -1,0 +1,53 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <AssemblyName>example</AssemblyName>
+    <Description>Example plugin</Description>
+    <Version>1.0.0</Version>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+  
+  <PropertyGroup>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BepInEx.Analyzers" Version="1.*" PrivateAssets="all" />
+    <PackageReference Include="BepInEx.Core" Version="5.*" />
+    <PackageReference Include="BepInEx.PluginInfoProps" Version="1.*" />
+    <PackageReference Include="UnityEngine.Modules" Version="5.6.0" IncludeAssets="compile" />
+  </ItemGroup>
+  
+  <ItemGroup Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'">
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2" PrivateAssets="all" />
+  </ItemGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>..\..\game\RainWorld_Data\StreamingAssets\mods\$(SolutionName)\plugins</OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>..\..\game\RainWorld_Data\Managed\Assembly-CSharp.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="xcopy /s ..\..\mod ..\..\game\RainWorld_Data\StreamingAssets\mods\$(SolutionName) /Y" Condition="'$(OS)' != 'Unix'" />
+    <Exec Command="cp -rf ../../mod/. ../../game/RainWorld_Data/StreamingAssets/mods/$(SolutionName)" Condition="'$(OS)' == 'Unix'" />
+    <Exec Command="xcopy /s /i ..\..\game\RainWorld_Data\StreamingAssets\mods\$(SolutionName) ..\..\build\remix\$(SolutionName) /Y" Condition="'$(OS)' != 'Unix'" />
+    <Exec Command="mkdir -p ../../build/remix" Condition="'$(OS)' == 'Unix'" />
+    <Exec Command="cp -rf ../../game/RainWorld_Data/StreamingAssets/mods/$(SolutionName)/. ../../build/remix" Condition="'$(OS)' == 'Unix'" />
+  </Target>
+  
+  <ProjectExtensions>
+    <MonoDevelop>
+      <Properties>
+        <Deployment.LinuxDeployData generatePcFile="False" />
+      </Properties>
+    </MonoDevelop>
+  </ProjectExtensions>
+</Project>

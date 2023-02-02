@@ -1,0 +1,74 @@
+How to set up this mod:
+1. Copy your Rain World installation to a folder named 'game'
+   Should look like this:
+   -- game
+     -- RainWorld_Data
+     -- ..
+     -- RainWorld.exe
+     -- ...
+2. Edit 'mod/modinfo.json' to your liking, make sure to use a lowercase mod id
+3. Any assets and files that need to be loaded by the game go into 'mod', this folder is copied to the build folder
+
+
+
+Where to write the mod:
+The project comes with two templates: a plugin template and a patcher template, both found in src/
+You can copy 'plugin' or 'patcher' and use that to develop your plugin, as long as it is saved in src/ it should work.
+
+
+
+Note about patchers:
+Patchers CANNOT be debugged using the Unity debug tools as they load too early.
+You will need to use debug logging to debug patchers.
+
+
+
+Building:
+To build this mod you will need to have .NET installed. The dotnet CLI can be used to build the package.
+Buildin can be done cross-platform, `dotnet build` will copy the mod to the built-in Remix as well as `build/remix`.
+The final mod is saved in `build/remix`, ready to be installed outside of the project.
+
+
+
+Debugging your mods:
+You can run the project from Visual Studio and it should start Rain World, follow these steps after launch:
+1. Go to Remix
+2. Enable dev tools
+3. Enable your mod
+4. Restart the game and wait for it to fully load up
+
+After that you need to modify your Rain World installation to support the Unity debugger:
+1. Download Unity 2020.3.38 (MUST BE THIS VERSION) from https://unity.com/releases/editor/archive (download the editor)
+2. Install the editor, after the installation completes navigate to the editor's installation folder
+3. Go to Data/PlaybackEngines/windowsstandalonesupport/Variations/win32_player_development_mono
+4. Copy WindowsPlayer.exe and UnityPlayer.dll to the project game folder and overwrite the existing dll
+5. Delete RainWorld.exe and rename WindowsPlayer.exe to RainWorld.exe
+6. Navigate back to the editor debug binaries in Data/PlaybackEngines/windowsstandalonesupport/Variations/win32_player_development_mono
+7. Copy all files in the debug binaries of the 'Data/Managed' folder to RainWorld_Data/Managed, overwrite all files
+8. Copy the debug file of MonoBleedingEdge/EmbedRuntime/mono-2.0-bdwgc.dll to Rain World's MonoBleedingEdge/EmbedRuntime/mono-2.0-bdwgc.dll, overwrite it
+9. Navigate to RainWorld_Data
+10. Edit boot.config, add the following to it: player-connection-debug=1
+11. Also add this line to that file to make unity wait for debugging: wait-for-managed-debugger=1
+You're done, after setting this up, start the game via visual studio and wait for the popup to attach the debugger
+After the popup shows, in visual studio, go to Debug -> Attach Unity Debugger, then press ok on the popup and you can debug your mod
+
+Troubleshooting debugging:
+If a console with a lot of errors pops up and a blackscreen occurs, the BepInEx installation is corrupted. To fix this, follow these steps:
+1. Delete all folders in BepInEx apart from patchers, plugins and core.
+2. Delete doorstop_config.ini and winhttp.dll
+3. Navigate to BepInEx/plugins and delete everything apart from the file HOOKS-Assembly-CSharp.dll
+4. Navigate back and go to BepInEx/patchers, delete everything apart from BepInEx.MonoMod.Loader, BepInEx.MultiFolderLoader and Dragons.PublicDragon
+5. Restart the game, the errors should be gone
+
+
+
+Assets and other content:
+Note that this is untested but deducted from the built-in mods.
+
+According to what i heard in the Discord server, Rain World loads mergedmods first followed by mod assets, after that it loads from streamingassets.
+As long as you follow the structure seen in RainWorld_Data/StreamingAssets, you can override and/or add assets by adding the files and folders to your project's mod folder.
+For more info you can refer to https://rainworldmodding.miraheze.org/wiki/Downpour_Reference/Mod_Directories
+
+The 'mod/' folder is copied to the final mod package and Remix will load the assets from that package should you have any.
+
+REMEMBER: Your assets are NOT copied over unless you fully rebuild the mod in Visual Studio, after each change to non-code parts of the mod you MUST rebuild the full mod.
