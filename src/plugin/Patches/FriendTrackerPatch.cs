@@ -8,7 +8,7 @@ using HarmonyLib;
 namespace Sheltered.Patches
 {
     /// <summary>
-    /// Patch for the Lizard AI to control if they will follow the player or not
+    /// Patch for creature AI to control if they will follow the player or not
     /// </summary>
     [HarmonyPatch(typeof(FriendTracker))]
     public static class FriendTrackerPatch
@@ -21,7 +21,7 @@ namespace Sheltered.Patches
             if (__instance.creature.State.unrecognizedSaveStrings.ContainsKey("Sheltered::ShouldStay")
                 && __instance.creature.State.unrecognizedSaveStrings["Sheltered::ShouldStay"].ToLower() == "true")
             {
-                // Make the lizard stay
+                // Make the creature stay
                 __instance.friendDest = __instance.creature.coord;
 
                 // Prevent original code from running

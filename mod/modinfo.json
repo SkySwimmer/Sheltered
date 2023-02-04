@@ -1,10 +1,10 @@
 {
 	"id": "sheltered",
 	"name": "Reasonably Sheltered",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"hide_version": false,
 	"authors": "Zera",
-	"description": "A simple mod to add a mechanic that tells your tamed lizards to stay where they are. If you press DOWN while interacting with your lizard they will remain where they are.\n\nNOTE: this mod just launched and needs proper testing, while dev testing looked good i would not recommend using this mod in your main saves until it is fully tested and stable.\n\nSource code: https://github.com/SkySwimmer/Sheltered\nIf you are not using steam, prebuild binaries can be found on the github.",
+	"description": "A simple mod to add a mechanic that tells friend creatures to stay where they are. If you press DOWN while interacting with the creature they will remain where they are.\n\nNOTE: this mod just launched and needs proper testing, while dev testing looked good i would not recommend using this mod in your main saves until it is fully tested and stable.\n\nSource code: https://github.com/SkySwimmer/Sheltered\nIf you are not using steam, prebuild binaries can be found on the github.",
 	"requirements": [],
 	"requirements_names": [],
 	"checksum_override_version": false

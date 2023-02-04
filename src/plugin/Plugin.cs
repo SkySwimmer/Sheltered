@@ -17,6 +17,8 @@ namespace Sheltered
             Logger.LogInfo($"Plugin {PluginInfo.PLUGIN_GUID} is loaded! Applying patches...");
             Harmony.CreateAndPatchAll(typeof(FriendTrackerPatch));
             Harmony.CreateAndPatchAll(typeof(PlayerPatch));
+            Harmony.CreateAndPatchAll(typeof(LizardAIPatch));
+            Harmony.CreateAndPatchAll(typeof(SlugNPCAIPatch));
         }
     }
 }
